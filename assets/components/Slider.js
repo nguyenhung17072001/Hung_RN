@@ -6,10 +6,8 @@ import {
     SafeAreaView, 
     Image, 
     Dimensions, 
-    ScrollView, 
     TouchableOpacity,
-    Animated, 
-    FlatList
+    FlatList,
 } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
 import Icon from "react-native-vector-icons/Ionicons"
@@ -154,7 +152,7 @@ const Slider = () => {
             />
             {footer? <Footer /> : (
                 <View style={{justifyContent: 'center', alignItems: 'center', height: 100, width: WIDTH}}>
-                    <TouchableOpacity style={styles.startButton} onPress={()=>{setShowRealApp(true)}}>
+                    <TouchableOpacity style={styles.startButton} onPress={done}>
                         <Text style={{color: 'white'}}>Bắt đầu ngay</Text>
                         
                     </TouchableOpacity>
