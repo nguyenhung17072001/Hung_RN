@@ -12,12 +12,25 @@ import {
 } from "react-native";
 import Icon from 'react-native-vector-icons/FontAwesome'
 import IconEntypo from 'react-native-vector-icons/Entypo'
-const {height, width} = Dimensions.get('window');
 
-const SignIn =()=> {
+import { useDispatch,  } from "react-redux";
+import {Login} from '../store/action'
+
+
+
+const {height, width} = Dimensions.get('window');
+const SignIn =({navigation})=> {
     const [remember, setRemember] = useState(true)
     const rememberClick = ()=> {
         setRemember(!remember);
+    }
+
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+
+    const dispatch = useDispatch();
+    const submit =()=> {
+        dispatch(Login(email, password))
     }
     return(
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} >
@@ -28,12 +41,16 @@ const SignIn =()=> {
             <Text style={styles.text}>Đăng nhập</Text>
             <TextInput 
                 style={styles.textInput} 
-                placeholder="E-mail"  
+                placeholder="E-mail"
+                value={email}
+                onChangeText={(text)=> setEmail(text)} 
             />
             <TextInput 
                 style={styles.textInput} 
                 placeholder="Mật khẩu" 
                 secureTextEntry
+                value={password}
+                onChangeText={(text)=> setPassword(text)} 
             />
             <View style={{marginLeft: 20, marginTop: 20, marginRight: 40, flexDirection: 'row', justifyContent: 'space-between'}}>
                 <View style={{flexDirection: 'row', alignItems: 'center'}}>
@@ -45,14 +62,14 @@ const SignIn =()=> {
                     </TouchableOpacity>
                     <Text style={{marginLeft: 4}}>Ghi nhớ</Text>
                 </View>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={()=> navigation.navigate('ForgotPassword')}>
                     <Text>Quên mật khẩu</Text>
                 </TouchableOpacity>
             </View>
             
         
 
-            <TouchableOpacity style={styles.button}>
+            <TouchableOpacity style={styles.button} onPress={submit}>
                 <Text style={{fontSize: 18, fontWeight: 'bold', color: 'white'}}>Đăng nhập</Text>
             </TouchableOpacity>
             <Text style={{textAlign: 'center', marginTop: 20}}>Hoặc bằng</Text>
@@ -67,8 +84,8 @@ const SignIn =()=> {
         </View> 
         <View style={{flexDirection: 'row', justifyContent: 'center'}}>
             <Text style={{ fontSize: 14, color: '#95989A'}}>Bạn chưa có tài khoản? </Text>
-            <TouchableOpacity>
-                <Text style={{color: '#19769F', fontSize: 14,}}>  Tạo tài khoản ngay</Text>
+            <TouchableOpacity onPress={()=> navigation.navigate('Registration')}>
+                <Text style={{color: '#19769F', fontSize: 14,}}>Tạo tài khoản ngay</Text>
             </TouchableOpacity>
             
         </View>

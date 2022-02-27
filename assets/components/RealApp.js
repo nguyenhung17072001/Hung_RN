@@ -5,12 +5,18 @@ import {
     StyleSheet ,
     SafeAreaView, 
 } from "react-native";
+
+
 import SignIn from "./SignIn";
 import Registration from "./Registration";
 import ForgotPassword from "./ForgotPassword";
+
 const RealApp =()=> {
     return(
-       <SignIn />
+        
+        <SignIn/>
+       
+       
     )
 }
 

@@ -9,7 +9,7 @@ import {
     TouchableOpacity,
     FlatList,
 } from "react-native";
-import LinearGradient from "react-native-linear-gradient";
+
 import Icon from "react-native-vector-icons/Ionicons"
 import RealApp from "./RealApp";
 
@@ -22,9 +22,7 @@ const slides = [
     text: 'Thông tin được cá nhân hóa theo tài khoản của bạn',
     image: require('../image/slider1.png'),
     backgroundColor: 'white',
-    showPrevButton: true,
-    showNextButton: true,
-    showDoneButton: false,
+    
   },
   {
     key: 2,
@@ -32,9 +30,7 @@ const slides = [
     text: 'Thông tin bệnh nhân được lưu trữ nhanh chóng và hiệu quả',
     image: require('../image/slider2.png'),
     backgroundColor: 'white',
-    showPrevButton: true,
-    showNextButton: true,
-    showDoneButton: false,
+    
   },
   {
     key: 3,
@@ -42,9 +38,7 @@ const slides = [
     text: 'Thông báo và nhắc nhở lịch hẹn khám và lịch tái khám',
     image: require('../image/slider3.png'),
     backgroundColor: 'white',
-    showPrevButton: false,
-    showNextButton: false,
-    showDoneButton: true,
+    
   }
 ];
 

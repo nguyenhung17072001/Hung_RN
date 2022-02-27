@@ -11,11 +11,11 @@ import {
 } from "react-native";
 import Icon from 'react-native-vector-icons/Ionicons'
 
-const ForgotPassword = () => {
+const ForgotPassword = ({navigation}) => {
     return (
         <TouchableWithoutFeedback style={{flex: 1}} onPress={Keyboard.dismiss}>
             <KeyboardAvoidingView behavior="height" style={styles.conatiner}>
-                <TouchableOpacity activeOpacity={1}>
+                <TouchableOpacity onPress={()=> navigation.goBack()} activeOpacity={1} >
                     <Icon style={{marginTop: 30, marginLeft: 10, color: '#95989A'}} name="chevron-back" color={'#848484'} size={24}/>
                 </TouchableOpacity>
                 <Text style={styles.text}>Quên mật khẩu</Text>
