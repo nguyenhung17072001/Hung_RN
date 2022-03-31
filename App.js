@@ -6,6 +6,8 @@ import { NavigationContainer } from '@react-navigation/native';
 import MyStack from './assets/components/MyStack';
 import { Provider } from 'react-redux';
 import { store } from './assets/store';
+
+
 const App = () => {
   return (
     <Provider store={store}>

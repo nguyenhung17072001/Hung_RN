@@ -1,42 +1,29 @@
 
 //State
 const initialState = {
-    authToken: null,
-    users: []
+    currentUser: null,
+    error: null,
 }
 
-// Action
+
 //Reducer
 export default (state = initialState, action) => {
     switch(action.type) {
-        case 'LOGIN':
-            const email= action.user.email;
-            const password= action.user.password;
-            const loginUser = state?.users?.find((item)=>item.email===email && item.password=== password)
+        
+        case 'LOG_IN_SUCCESS':
             return {
                 ...state,
-                authToken: loginUser ? loginUser.email: null,
-            }
-        case 'LOGOUT':
+                currentUser: action.payload,
+                error: null,
+            };
+        case 'LOG_IN_FAILURE':
+        case 'REGISTER_FAILURE':
             return {
-                authToken: action.payload,
-            }    
-        case 'REGISTRATION':
-            return {
-                ... state,
-                
-                users: [
-                    ...state.users,
-                    {
-                        uersname: action.user.username,
-                        email: action.user.email,
-                        phonenumber: action.user.phonenumber,
-                        password: action.user.password,
-                        
-                    }
-                ]
-
-            }
+                ...state,
+                error: action.payload,
+            };
+        case 'LOG_OUT':
+            return initialState
         default: 
             return state;
     }

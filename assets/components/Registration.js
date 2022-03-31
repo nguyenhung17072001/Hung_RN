@@ -10,12 +10,12 @@ import {
     TouchableOpacity,
     Alert,
 } from "react-native";
-import axios from "axios";
+
 import Icon from 'react-native-vector-icons/Ionicons'
 import { useDispatch, connect, useSelector } from "react-redux";
-import {Registor} from '../store/action'
-import { store } from "../store";
-const Registration = ({navigation}) => {
+import { register } from "../store/action";
+
+const Registration = ({navigation, registration}) => {
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [phonenumber, setPhonenumber] = useState('');
@@ -24,52 +24,14 @@ const Registration = ({navigation}) => {
     
     const dispatch = useDispatch();
     const submit = ()=>{
-        dispatch(Registor(email, password,phonenumber,username))
-        Alert.alert('Dang ky thanh cong tai khoan')
-
-        fetch('http://restapi.adequateshop.com/api/authaccount/registration', {
-            method: 'POST',
-            headers: {
-                Accept: 'application/json',
-                'Content-Type': 'application/json',
-                'Authorization':'bearer 123456789',
-                
-            },
-            body: JSON.stringify({
-                
-                email: email,
-                password: password,
-                phonenumber: phonenumber,
-                username: username,
-                
-            })
-            
-        })
-        .then((response)=>response.json())
-        .then((json)=>{
-            console.log('data registor: ', json)
-        })
-        ;
-
-        
-    }
-
-    /*const [data, setData] = useState([])
-    useEffect(()=> {
-        fetch('http://restapi.adequateshop.com/api/authaccount/registration')
-        .then((response)=>response.json())
-        .then((json)=>{
-            setData(json)
-            console.log('data login: ', data)
-        })
-        .catch((error)=> {
-            console.log('error data: ', error)
-        })
-
+        registration(email, password,phonenumber,username)
         
 
+       
         
-    }, [])  */
+    } 
+
+    
 
 
     return (
@@ -125,4 +87,21 @@ const styles = StyleSheet.create({
         borderRadius: 5,
     },
 })
-export default connect() (Registration);
+
+const mapStateToProps = state => {
+    return {
+      user: state.users
+    }
+  }
+  
+  const mapDispatchToProps = dispatch => {
+    return {
+      registration: (data) =>
+        dispatch(register(data))
+    }
+  }
+  
+  export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(Registration)

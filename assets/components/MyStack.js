@@ -1,9 +1,9 @@
-import React from 'react';
-import { Button, View, Text } from 'react-native';
+import React, {useState, useEffect} from 'react';
+import { Button, View, Text, Alert } from 'react-native';
 
 import { createStackNavigator } from '@react-navigation/stack';
 import SignIn from './SignIn';
-import ListUsers from './ListUers';
+import Home from './Home';
 import ForgotPassword from './ForgotPassword';
 import Registration from './Registration';
 import { useSelector } from 'react-redux';
@@ -11,19 +11,28 @@ import AuthReducers from '../store/reducer'
 import { store } from '../store';
 
 
+
 const Stack = createStackNavigator();
 const MyStack=()=> {
-  const token = useSelector(state=> state.AuthReducers.authToken);
-  console.log('token: ', token)
+  
 
-  store.subscribe(()=> {
+
+  const auth = useSelector(state=> state?.AuthReducers)
+  console.log('auth: ', auth)  
+  const currentUser = useSelector(state=> state?.AuthReducers?.currentUser)
+  const err = useSelector(state=> state?.AuthReducers?.error)
+  /* store.subscribe(()=> {
     console.log('State update', store.getState())
-  })
+  })  */
 
-  return (
+  if(currentUser !== null && err===null) {
     
-    token===null ?
-    <Stack.Navigator
+    return( <Home />)
+  }
+  else {
+    
+    return(
+      <Stack.Navigator
       screenOptions={{
         headerShown: false
       }}
@@ -33,11 +42,9 @@ const MyStack=()=> {
       <Stack.Screen name="Registration" component={Registration} />
       
     </Stack.Navigator>
-
-    : <ListUsers />
-
-   
-  );
+    )
+  }
+  
 }
 
 

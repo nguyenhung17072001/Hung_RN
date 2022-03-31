@@ -1,37 +1,38 @@
-export const Login = (email, password) => {
+export const Login = (credentials) => {
 
     
     return ({
-        type: 'LOGIN',
+        type: 'LOGIN_START',
         
-        user: {
-            email,
-            password,
-            
-        }
+        payload: credentials
     })
 }
 
-export const Logout = () => {
+export const logInSuccess = (user) => ({
+    type: 'LOG_IN_SUCCESS',
+    payload: user,
+  });
+  
+export const logInFailure = (error) => ({
+    type: 'LOG_IN_FAILURE',
+    payload: error,
+});
 
-    return ({
-        type: 'LOGOUT',
-        payload: null,
-    })
-}
-
-export const Registor =( email, password,phonenumber,username,id) => {
-
-    
-    return ({
-        type: 'REGISTRATION',
-        
-        user: {
-            email,
-            password,
-            phonenumber,
-            username,
-            
-        }
-    })
-}
+export const register = (credentials) => ({
+    type: 'REGISTER_START',
+    payload: credentials,
+  });
+  
+  export const registerSuccess = (user) => ({
+    type: 'REGISTER_SUCCESS',
+    payload: user,
+  });
+  
+  export const registerFailure = (error) => ({
+    type: 'REGISTER_FAILURE',
+    payload: error,
+  });
+  
+  export const logOut = () => ({
+    type: 'LOG_OUT',
+  });
